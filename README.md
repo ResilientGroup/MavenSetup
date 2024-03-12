@@ -15,6 +15,22 @@ A basic setup for all maven projects containing a build and tools for java.
 		url = ../MavenSetup.git
 		branch = .
 	```
+3. Add the following to your pom.xml:
+	````xml
+	<project>
+		<parent>
+			<groupId>works.reload</groupId>
+			<artifactId>base</artifactId>
+			<version>1.0.0</version>
+			<relativePath>.mvn/Base/pom.xml</relativePath>
+		</parent>
+ 
+		<modules>
+			<module>.mvn/Base</module>
+			<!-- Add your modules here -->
+		</modules>
+	</project>
+	````
 
 ## Maven Wrapper Note
 As this setup enforces a minimum maven version,
