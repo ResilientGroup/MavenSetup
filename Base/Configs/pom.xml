@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>works.reload</groupId>
+		<artifactId>versions</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../Versions/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>configs</artifactId>
+	<version>1.0.0</version>
+	<name>Configs</name>
+	<description>Global configurations for java tooling</description>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>.</directory>
+				<includes>
+					<include>checkstyle.xml</include>
+					<include>pmd-ruleset.xml</include>
+					<include>spotbugs-exclude.xml</include>
+				</includes>
+				<targetPath>config</targetPath>
+			</resource>
+		</resources>
+	</build>
+</project>
