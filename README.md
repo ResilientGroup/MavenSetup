@@ -24,7 +24,8 @@ A basic setup for all maven projects containing a build and tools for java.
 			<version>1.0.0</version>
 			<relativePath>.mvn/Base/pom.xml</relativePath>
 		</parent>
- 
+
+		<!-- Only add this if you have a parent pom with packaging pom -->
 		<modules>
 			<module>.mvn/Base</module>
 			<!-- Add your modules here -->
