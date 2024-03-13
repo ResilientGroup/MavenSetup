@@ -11,7 +11,7 @@ help: ## This help.
 
 # Updates of third-party dependencies
 update-dependencies: ## Update Maven dependencies and plugins which have versions defined in properties
-	.mvn/mvnw --projects :base,:versions clean versions:update-properties
+	cd Base && ../mvnw --projects :base,:versions clean versions:update-properties
 
 update-snapshot-dependencies: ## Update locked snapshot versions with the latest available one in the POM
-	.mvn/mvnw --projects :base,:versions versions:unlock-snapshots versions:lock-snapshots
+	cd Base && ../mvnw --projects :base,:versions versions:unlock-snapshots versions:lock-snapshots
