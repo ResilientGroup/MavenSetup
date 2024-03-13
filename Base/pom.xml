@@ -326,6 +326,35 @@
 							</rules>
 						</configuration>
 					</execution>
+					<!--
+						Banned dependencies are not allowed in the project, and may cause build failures or unexpected behavior.
+						This is due to conflicts between banned dependencies and existing project dependencies.
+						For example, a banned dependency may be an older version of a project dependency,
+						but with a different groupId or artifactId, making it difficult for Maven to detect the conflict
+						and choose the correct dependency.
+					-->
+					<execution>
+						<id>enforce-banned-dependencies-from-base</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<bannedDependencies>
+									<excludes>
+										<!-- We use com.github.spotbugs, the successor of FindBugs. -->
+										<exclude>com.google.code.findbugs</exclude>
+										<!-- We use org.junit.jupiter; previous versions (i.e. JUnit 4) should never be referenced. -->
+										<exclude>junit</exclude>
+									</excludes>
+									<includes>
+										<!-- SpotBugs still references the jsr305 Artifact from the original FindBugs. -->
+										<include>com.google.code.findbugs:jsr305</include>
+									</includes>
+								</bannedDependencies>
+							</rules>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
