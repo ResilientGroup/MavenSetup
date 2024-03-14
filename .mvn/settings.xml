@@ -4,8 +4,7 @@
 	<mirrors>
 		<mirror>
 			<id>ReLoAd-Mirror</id>
-			<url>https://nexus.reloadkube.managedservices.resilient-teched.com/repository/default/
-			</url>
+			<url>https://nexus.reloadkube.managedservices.resilient-teched.com/repository/default/</url>
 			<mirrorOf>*</mirrorOf>
 		</mirror>
 	</mirrors>

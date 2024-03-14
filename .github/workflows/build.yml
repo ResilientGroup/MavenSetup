@@ -1,0 +1,31 @@
+name: Build
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Java and Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'maven'
+          server-id: 'reload'
+          server-username: ${{ secrets.MAVEN_SERVER_USERNAME }}
+          server-password: ${{ secrets.MAVEN_SERVER_PASSWORD }}
+      - name: Build with Maven verify
+        if: "github.ref != 'refs/heads/main'"
+        run: ./mvnw -B verify
+      - name: Build with Maven deploy
+        if: "github.ref == 'refs/heads/main'"
+        run: ./mvnw -B deploy
