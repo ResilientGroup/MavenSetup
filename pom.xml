@@ -4,15 +4,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>works.reload</groupId>
+		<groupId>works.reload.parent</groupId>
 		<artifactId>versions</artifactId>
 		<version>${revision}${changelist}</version>
 		<relativePath>./Versions/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>base</artifactId>
+	<groupId>works.reload</groupId>
+	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
-	<name>Base</name>
+	<name>Parent</name>
 	<description>Global configurations for java projects and code validation tools</description>
 
 	<properties>
@@ -218,7 +219,7 @@
 							<version>${pmd-java.version}</version>
 						</dependency>
 						<dependency>
-							<groupId>works.reload</groupId>
+							<groupId>works.reload.parent</groupId>
 							<artifactId>configs</artifactId>
 							<version>${revision}${changelist}</version>
 						</dependency>
@@ -237,7 +238,7 @@
 					<version>${spotbugs-maven-plugin.version}</version>
 					<dependencies>
 						<dependency>
-							<groupId>works.reload</groupId>
+							<groupId>works.reload.parent</groupId>
 							<artifactId>configs</artifactId>
 							<version>${revision}${changelist}</version>
 						</dependency>
@@ -259,7 +260,7 @@
 							<version>${checkstyle.version}</version>
 						</dependency>
 						<dependency>
-							<groupId>works.reload</groupId>
+							<groupId>works.reload.parent</groupId>
 							<artifactId>configs</artifactId>
 							<version>${revision}${changelist}</version>
 						</dependency>

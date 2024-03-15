@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>works.reload</groupId>
+		<groupId>works.reload.parent</groupId>
 		<artifactId>versions</artifactId>
 		<version>${revision}${changelist}</version>
 		<relativePath>../Versions/pom.xml</relativePath>
