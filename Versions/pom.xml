@@ -3,7 +3,7 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>works.reload</groupId>
+	<groupId>works.reload.parent</groupId>
 	<artifactId>versions</artifactId>
 	<version>${revision}${changelist}</version>
 	<packaging>pom</packaging>
