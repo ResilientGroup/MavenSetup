@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>works.reload</groupId>
 		<artifactId>versions</artifactId>
-		<version>${revision}</version>
+		<version>${revision}${changelist}</version>
 		<relativePath>./Versions/pom.xml</relativePath>
 	</parent>
 
@@ -16,7 +16,9 @@
 	<description>Global configurations for java projects and code validation tools</description>
 
 	<properties>
-		<works-reload-configs.version>1.0.0</works-reload-configs.version>
+		<!-- project version -->
+		<revision>1.0.0</revision>
+		<changelist>-SNAPSHOT</changelist>
 		<!-- dependencyManagement versions -->
 		<jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
 		<spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
@@ -41,7 +43,6 @@
 		<cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
 		<pitest-maven.version>1.15.8</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
-		<flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
 		<versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
 	</properties>
 
@@ -219,7 +220,7 @@
 						<dependency>
 							<groupId>works.reload</groupId>
 							<artifactId>configs</artifactId>
-							<version>${works-reload-configs.version}</version>
+							<version>${revision}${changelist}</version>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -238,7 +239,7 @@
 						<dependency>
 							<groupId>works.reload</groupId>
 							<artifactId>configs</artifactId>
-							<version>${works-reload-configs.version}</version>
+							<version>${revision}${changelist}</version>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -260,7 +261,7 @@
 						<dependency>
 							<groupId>works.reload</groupId>
 							<artifactId>configs</artifactId>
-							<version>${works-reload-configs.version}</version>
+							<version>${revision}${changelist}</version>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -294,11 +295,6 @@
 							<version>${pitest-junit5-plugin.version}</version>
 						</dependency>
 					</dependencies>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>flatten-maven-plugin</artifactId>
-					<version>${flatten-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -443,31 +439,6 @@
 						<id>check</id>
 						<goals>
 							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<configuration>
-					<updatePomFile>true</updatePomFile>
-					<flattenMode>resolveCiFriendliesOnly</flattenMode>
-					<outputDirectory>${project.build.directory}</outputDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>flatten.clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
 						</goals>
 					</execution>
 				</executions>

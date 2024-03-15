@@ -2,7 +2,7 @@
 # This will output the help for each task
 # thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 .PHONY: help \
-	update-dependencies update-snapshot-dependencies
+	update-dependencies update-snapshot-dependencies bump-version
 
 help: ## This help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -15,3 +15,6 @@ update-dependencies: ## Update Maven dependencies and plugins which have version
 
 update-snapshot-dependencies: ## Update locked snapshot versions with the latest available one in the POM
 	./mvnw --projects :base,:versions versions:unlock-snapshots versions:lock-snapshots
+
+bump-version: ## Bump the version of the project
+	[ -n "$(NEW_VERSION)" ] && ./mvnw versions:set-property -Dproperty=revision -DnewVersion=$(NEW_VERSION)

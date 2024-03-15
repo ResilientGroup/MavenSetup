@@ -7,10 +7,10 @@ on:
       - '**'
 
 jobs:
-  build:
-    name: Build
+  build_feature_branch:
+    name: Build feature branch
     runs-on: ubuntu-latest
-
+    if: "github.ref != 'refs/heads/main'"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,12 +20,47 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           cache: 'maven'
+      - name: Build with Maven verify
+        run: ./mvnw -B verify
+  build_main_branch:
+    name: Build main branch
+    runs-on: ubuntu-latest
+    if: "github.ref == 'refs/heads/main'"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Java and Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'maven'
           server-id: 'reload'
           server-username: ${{ secrets.MAVEN_SERVER_USERNAME }}
           server-password: ${{ secrets.MAVEN_SERVER_PASSWORD }}
-      - name: Build with Maven verify
-        if: "github.ref != 'refs/heads/main'"
-        run: ./mvnw -B verify
+      - name: Read revision version from pom.xml
+        shell: bash
+        run: |
+          MAVEN_POM_REVISION_VERSION="$(./mvnw help:evaluate -Dexpression=revision -q -DforceStdout)"
+          echo "MAVEN_POM_REVISION_VERSION=$MAVEN_POM_REVISION_VERSION" >> $GITHUB_ENV
+      - name: Check if revision is already tagged
+        shell: bash
+        run: |
+          if git tag -l v$MAVEN_POM_REVISION_VERSION | grep -q v$MAVEN_POM_REVISION_VERSION; then
+            echo "Revision $MAVEN_POM_REVISION_VERSION is already tagged. Skipping the build and deployment!"
+            exit 0
+          else
+            DEPLOY_RELEASE=true
+            echo "DEPLOY_RELEASE=$DEPLOY_RELEASE" >> $GITHUB_ENV
+          fi
       - name: Build with Maven deploy
-        if: "github.ref == 'refs/heads/main'"
-        run: ./mvnw -B deploy
+        if: ${{ env.DEPLOY_RELEASE  == 'true' }}
+        run: ./mvnw -Dchangelist= -B deploy
+      - name: Create new git tag
+        uses: rickstaa/action-create-tag@v1
+        if: ${{ env.DEPLOY_RELEASE  == 'true' }}
+        with:
+          tag: ${{ env.MAVEN_POM_REVISION_VERSION }}
+          message: Release ${{ env.MAVEN_POM_REVISION_VERSION }}

@@ -6,13 +6,19 @@
 	<parent>
 		<groupId>works.reload</groupId>
 		<artifactId>versions</artifactId>
-		<version>${revision}</version>
+		<version>${revision}${changelist}</version>
 		<relativePath>../Versions/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>configs</artifactId>
 	<name>Configs</name>
 	<description>Global configurations for java tooling</description>
+
+	<properties>
+		<!-- project version -->
+		<revision>1.0.0</revision>
+		<changelist>-SNAPSHOT</changelist>
+	</properties>
 
 	<build>
 		<resources>
