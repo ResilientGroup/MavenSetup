@@ -18,7 +18,7 @@
 
 	<properties>
 		<!-- project version -->
-		<revision>1.0.0</revision>
+		<revision>1.0.1</revision>
 		<changelist>-SNAPSHOT</changelist>
 		<!-- dependencyManagement versions -->
 		<jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
@@ -51,6 +51,13 @@
 		<module>Versions</module>
 		<module>Configs</module>
 	</modules>
+
+	<repositories>
+		<repository>
+			<id>reload-repo</id>
+			<url>https://nexus.reloadkube.managedservices.resilient-teched.com/repository/reload/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
