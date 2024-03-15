@@ -383,6 +383,7 @@
 							<shadedArtifactId>${project.name}</shadedArtifactId>
 							<createDependencyReducedPom>false</createDependencyReducedPom>
 							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<outputFile>${project.build.directory}/${project.build.finalName}-shaded.jar</outputFile>
 							<artifactSet>
 								<excludes>
 									<exclude>com.github.spotbugs:spotbugs-annotations</exclude>
@@ -393,6 +394,7 @@
 									<artifact>*</artifact>
 									<excludes>
 										<exclude>META-INF/**</exclude>
+										<exclude>javax/**</exclude>
 									</excludes>
 								</filter>
 							</filters>
