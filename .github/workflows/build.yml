@@ -40,8 +40,8 @@ jobs:
           java-version: 17
           cache: 'maven'
           server-id: 'reload'
-          server-username: ${{ secrets.MAVEN_SERVER_USERNAME }}
-          server-password: ${{ secrets.MAVEN_SERVER_PASSWORD }}
+          server-username: MAVEN_SERVER_USERNAME
+          server-password: MAVEN_SERVER_PASSWORD
       - name: Read revision version from pom.xml
         shell: bash
         run: |
@@ -60,6 +60,9 @@ jobs:
       - name: Build with Maven deploy
         if: ${{ env.DEPLOY_RELEASE  == 'true' }}
         run: ./mvnw -Dchangelist= -B deploy
+        env:
+          MAVEN_SERVER_USERNAME: ${{ secrets.MAVEN_SERVER_USERNAME }}
+          MAVEN_SERVER_PASSWORD: ${{ secrets.MAVEN_SERVER_PASSWORD }}
       - name: Create new git tag
         uses: rickstaa/action-create-tag@v1
         if: ${{ env.DEPLOY_RELEASE  == 'true' }}
