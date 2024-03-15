@@ -14,7 +14,7 @@ A basic setup for all maven projects containing building and tools for java.
 
         <repositories>
             <repository>
-                <id>ReLoAd</id>
+                <id>reload-repo</id>
                 <url>https://nexus.reloadkube.managedservices.resilient-teched.com/repository/reload/</url>
             </repository>
         </repositories> 
