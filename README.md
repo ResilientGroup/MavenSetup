@@ -8,7 +8,7 @@ A basic setup for all maven projects containing building and tools for java.
         <parent>
             <groupId>works.reload</groupId>
             <artifactId>parent</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.2</version>
         </parent>
 
         <repositories>
