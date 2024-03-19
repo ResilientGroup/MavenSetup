@@ -7,7 +7,7 @@ A basic setup for all maven projects containing building and tools for java.
     <project>
         <parent>
             <groupId>works.reload</groupId>
-            <artifactId>base</artifactId>
+            <artifactId>parent</artifactId>
             <version>1.0.0</version>
         </parent>
 
