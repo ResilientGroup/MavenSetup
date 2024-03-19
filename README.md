@@ -9,7 +9,6 @@ A basic setup for all maven projects containing building and tools for java.
             <groupId>works.reload</groupId>
             <artifactId>base</artifactId>
             <version>1.0.0</version>
-            <relativePath>.mvn/Base/pom.xml</relativePath>
         </parent>
 
         <repositories>
