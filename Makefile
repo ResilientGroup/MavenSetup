@@ -19,4 +19,5 @@ update-snapshot-dependencies: ## Update locked snapshot versions with the latest
 	$(MAVEN_COMMAND) --projects :parent,:versions -DgenerateBackupPoms=false versions:unlock-snapshots versions:lock-snapshots
 
 bump-version: ## Bump the version of the project
-	[ -n "$(NEW_VERSION)" ] && $(MAVEN_COMMAND) versions:set-property -DgenerateBackupPoms=false -Dproperty=revision -DnewVersion=$(NEW_VERSION)
+	if [ -z "$(NEW_VERSION)" ]; then echo 'ERROR: NEW_VERSION is not set.'; exit 2; fi
+	$(MAVEN_COMMAND) versions:set-property -DgenerateBackupPoms=false -Dproperty=revision -DnewVersion=$(NEW_VERSION)
