@@ -9,12 +9,14 @@ help: ## This help.
 
 .DEFAULT_GOAL := help
 
+MAVEN_COMMAND ?= ./mvnw
+
 # Updates of third-party dependencies
 update-dependencies: ## Update Maven dependencies and plugins which have versions defined in properties
-	./mvnw --projects :base,:versions clean -DgenerateBackupPoms=false versions:update-properties
+	$(MAVEN_COMMAND) --projects :base,:versions clean -DgenerateBackupPoms=false versions:update-properties
 
 update-snapshot-dependencies: ## Update locked snapshot versions with the latest available one in the POM
-	./mvnw --projects :base,:versions -DgenerateBackupPoms=false versions:unlock-snapshots versions:lock-snapshots
+	$(MAVEN_COMMAND) --projects :base,:versions -DgenerateBackupPoms=false versions:unlock-snapshots versions:lock-snapshots
 
 bump-version: ## Bump the version of the project
-	[ -n "$(NEW_VERSION)" ] && ./mvnw versions:set-property -DgenerateBackupPoms=false -Dproperty=revision -DnewVersion=$(NEW_VERSION)
+	[ -n "$(NEW_VERSION)" ] && $(MAVEN_COMMAND) versions:set-property -DgenerateBackupPoms=false -Dproperty=revision -DnewVersion=$(NEW_VERSION)
