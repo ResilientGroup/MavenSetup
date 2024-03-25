@@ -489,6 +489,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 				<configuration>
+					<excludeProperties>changelist</excludeProperties>
 					<ruleSet>
 						<rules>
 							<!-- We'll upgrade to PMD 7 once it's released. -->
