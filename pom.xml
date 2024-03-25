@@ -18,7 +18,7 @@
 
 	<properties>
 		<!-- project version -->
-		<revision>1.0.3</revision>
+		<revision>1.0.4</revision>
 		<changelist>-SNAPSHOT</changelist>
 		<!-- dependencyManagement versions -->
 		<jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
@@ -142,12 +142,6 @@
 
 	<build>
 		<finalName>${project.name}-${project.version}</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -318,6 +312,18 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<resources combine.children="append">
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
