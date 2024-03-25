@@ -17,4 +17,4 @@ update-snapshot-dependencies: ## Update locked snapshot versions with the latest
 	./mvnw --projects :base,:versions versions:unlock-snapshots versions:lock-snapshots
 
 bump-version: ## Bump the version of the project
-	[ -n "$(NEW_VERSION)" ] && ./mvnw versions:set-property -Dproperty=revision -DnewVersion=$(NEW_VERSION)
+	[ -n "$(NEW_VERSION)" ] && ./mvnw versions:set-property -DgenerateBackupPoms=false -Dproperty=revision -DnewVersion=$(NEW_VERSION)
