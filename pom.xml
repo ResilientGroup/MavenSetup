@@ -7,7 +7,7 @@
 		<groupId>works.reload.parent</groupId>
 		<artifactId>versions</artifactId>
 		<version>${revision}${changelist}</version>
-		<relativePath>./Versions/pom.xml</relativePath>
+		<relativePath>./versions/pom.xml</relativePath>
 	</parent>
 
 	<groupId>works.reload</groupId>
@@ -18,7 +18,7 @@
 
 	<properties>
 		<!-- project version -->
-		<revision>1.0.4</revision>
+		<revision>1.0.5</revision>
 		<changelist>-SNAPSHOT</changelist>
 		<!-- dependencyManagement versions -->
 		<jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
@@ -49,8 +49,8 @@
 	</properties>
 
 	<modules>
-		<module>Versions</module>
-		<module>Configs</module>
+		<module>versions</module>
+		<module>configs</module>
 	</modules>
 
 	<pluginRepositories>
@@ -141,7 +141,6 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>${project.name}-${project.version}</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -315,14 +314,39 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<configuration>
-					<resources combine.children="append">
-						<resource>
-							<directory>src/main/resources</directory>
-							<filtering>true</filtering>
-						</resource>
-					</resources>
-				</configuration>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-test-resources</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/test/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
