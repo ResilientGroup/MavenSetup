@@ -7,7 +7,7 @@
 		<groupId>works.reload.parent</groupId>
 		<artifactId>versions</artifactId>
 		<version>${revision}${changelist}</version>
-		<relativePath>../Versions/pom.xml</relativePath>
+		<relativePath>../versions/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>configs</artifactId>
@@ -16,7 +16,7 @@
 
 	<properties>
 		<!-- project version -->
-		<revision>1.0.4</revision>
+		<revision>1.0.5</revision>
 		<changelist>-SNAPSHOT</changelist>
 	</properties>
 
