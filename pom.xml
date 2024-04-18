@@ -46,6 +46,7 @@
 		<pitest-maven.version>1.16.0</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
 		<versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+		<maven-wrapper.version>3.2.0</maven-wrapper.version>
 	</properties>
 
 	<modules>
@@ -136,6 +137,12 @@
 				<version>${mockito.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.wrapper</groupId>
+				<artifactId>maven-wrapper</artifactId>
+				<version>${maven-wrapper.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
