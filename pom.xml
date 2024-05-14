@@ -18,13 +18,13 @@
 
 	<properties>
 		<!-- project version -->
-		<revision>1.1.0</revision>
+		<revision>1.2.0</revision>
 		<changelist>-SNAPSHOT</changelist>
 		<!-- dependencyManagement versions -->
 		<jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
-		<spotbugs-annotations.version>4.8.4</spotbugs-annotations.version>
+		<spotbugs-annotations.version>4.8.5</spotbugs-annotations.version>
 		<hamcrest.version>2.2</hamcrest.version>
-		<junit.version>5.10.2</junit.version>
+		<junit.version>5.11.0-M1</junit.version>
 		<mockito.version>5.11.0</mockito.version>
 		<!-- pluginManagement -->
 		<maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
@@ -32,21 +32,21 @@
 		<maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
 		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
-		<maven-shade-plugin.version>3.5.2</maven-shade-plugin.version>
+		<maven-shade-plugin.version>3.5.3</maven-shade-plugin.version>
 		<editorconfig-maven-plugin.version>0.1.3</editorconfig-maven-plugin.version>
-		<maven-pmd-plugin.version>3.21.2</maven-pmd-plugin.version>
-		<pmd-core.version>6.55.0</pmd-core.version>
-		<pmd-java.version>6.55.0</pmd-java.version>
-		<spotbugs-maven-plugin.version>4.8.4.0</spotbugs-maven-plugin.version>
+		<maven-pmd-plugin.version>3.22.0</maven-pmd-plugin.version>
+		<pmd-core.version>7.1.0</pmd-core.version>
+		<pmd-java.version>7.1.0</pmd-java.version>
+		<spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
 		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
-		<checkstyle.version>10.15.0</checkstyle.version>
+		<checkstyle.version>10.16.0</checkstyle.version>
 		<maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
 		<maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
 		<cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
 		<pitest-maven.version>1.16.0</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.2.1</pitest-junit5-plugin.version>
 		<versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-		<maven-wrapper.version>3.2.0</maven-wrapper.version>
+		<maven-wrapper.version>3.3.1</maven-wrapper.version>
 	</properties>
 
 	<modules>
@@ -521,31 +521,6 @@
 				<artifactId>versions-maven-plugin</artifactId>
 				<configuration>
 					<excludeProperties>changelist</excludeProperties>
-					<ruleSet>
-						<rules>
-							<!-- We'll upgrade to PMD 7 once it's released. -->
-							<rule>
-								<groupId>net.sourceforge.pmd</groupId>
-								<artifactId>pmd-core</artifactId>
-								<ignoreVersions>
-									<ignoreVersion>
-										<type>regex</type>
-										<version>7.0.0-rc.*</version>
-									</ignoreVersion>
-								</ignoreVersions>
-							</rule>
-							<rule>
-								<groupId>net.sourceforge.pmd</groupId>
-								<artifactId>pmd-java</artifactId>
-								<ignoreVersions>
-									<ignoreVersion>
-										<type>regex</type>
-										<version>7.0.0-rc.*</version>
-									</ignoreVersion>
-								</ignoreVersions>
-							</rule>
-						</rules>
-					</ruleSet>
 				</configuration>
 			</plugin>
 		</plugins>
