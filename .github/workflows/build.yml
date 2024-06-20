@@ -10,6 +10,11 @@ on:
   workflow_dispatch:
   # Allows reuse of this workflow as a generic "Java build with Maven that publishes to main on merge"
   workflow_call:
+    inputs:
+      javadoc-project-name:
+        description: Project subdirectory to upload the JavaDoc to in Google Cloud Storage.
+        required: true
+        type: string
     outputs:
       release-version:
         description: The version of the new release built on the main branch.
@@ -69,18 +74,42 @@ jobs:
             DEPLOY_RELEASE=true
             echo "DEPLOY_RELEASE=$DEPLOY_RELEASE" >> $GITHUB_ENV
           fi
+
       - name: Build with Maven deploy
         if: ${{ env.DEPLOY_RELEASE  == 'true' }}
-        run: ./mvnw -Dchangelist= -B deploy site:site site:stage
         env:
           MAVEN_SERVER_USERNAME: ${{ secrets.MAVEN_SERVER_USERNAME }}
           MAVEN_SERVER_PASSWORD: ${{ secrets.MAVEN_SERVER_PASSWORD }}
+        run: |
+          ./mvnw -Dchangelist= --batch-mode deploy -DstagingDirectory="${GITHUB_WORKSPACE}/target/latest" site:site site:stage
+          test -d "${GITHUB_WORKSPACE}/target/latest"
+          rm -rf -- "${GITHUB_WORKSPACE}/target/${MAVEN_POM_REVISION_VERSION}" || :
+          cp --recursive --verbose -- "${GITHUB_WORKSPACE}/target/latest" "${GITHUB_WORKSPACE}/target/${MAVEN_POM_REVISION_VERSION}"
       - name: Create new git tag
-        uses: rickstaa/action-create-tag@v1
         if: ${{ env.DEPLOY_RELEASE  == 'true' }}
+        uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{ env.MAVEN_POM_REVISION_VERSION }}
           message: Release ${{ env.MAVEN_POM_REVISION_VERSION }}
       - name: Set version output
         id: set-version
+        if: env.DEPLOY_RELEASE  == 'true'
         run: echo "release-version=${MAVEN_POM_REVISION_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.CLOUDBUILD_COMMON_GCP_KEY }}'
+      - name: Upload latest JavaDoc copy to Google Cloud Storage
+        uses: google-github-actions/upload-cloud-storage@v1
+        with:
+          path: target/latest
+          destination: resilient-reload-javadoc/${{ inputs.javadoc-project-name || 'MavenSetup' }}
+          process_gcloudignore: false
+      - name: Upload versioned JavaDoc to Google Cloud Storage
+        if: env.DEPLOY_RELEASE  == 'true'
+        uses: google-github-actions/upload-cloud-storage@v1
+        with:
+          path: target/${{ env.MAVEN_POM_REVISION_VERSION }}
+          destination: resilient-reload-javadoc/${{ inputs.javadoc-project-name || 'MavenSetup' }}
+          process_gcloudignore: false
