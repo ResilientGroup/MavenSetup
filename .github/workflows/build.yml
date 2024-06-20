@@ -71,7 +71,7 @@ jobs:
           fi
       - name: Build with Maven deploy
         if: ${{ env.DEPLOY_RELEASE  == 'true' }}
-        run: ./mvnw -Dchangelist= -B deploy
+        run: ./mvnw -Dchangelist= -B deploy site:site site:stage
         env:
           MAVEN_SERVER_USERNAME: ${{ secrets.MAVEN_SERVER_USERNAME }}
           MAVEN_SERVER_PASSWORD: ${{ secrets.MAVEN_SERVER_PASSWORD }}
