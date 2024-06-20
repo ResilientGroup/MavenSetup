@@ -10,6 +10,10 @@ on:
   workflow_dispatch:
   # Allows reuse of this workflow as a generic "Java build with Maven that publishes to main on merge"
   workflow_call:
+    outputs:
+      release-version:
+        description: The version of the new release built on the main branch.
+        value: ${{ jobs.build_main_branch.outputs.release-version }}
 
 jobs:
   build_feature_branch:
@@ -33,6 +37,8 @@ jobs:
     name: Build main branch
     runs-on: ubuntu-latest
     if: "github.ref == 'refs/heads/main'"
+    outputs:
+      release-version: ${{ steps.set-version.outputs.release-version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -75,3 +81,6 @@ jobs:
         with:
           tag: ${{ env.MAVEN_POM_REVISION_VERSION }}
           message: Release ${{ env.MAVEN_POM_REVISION_VERSION }}
+      - name: Set version output
+        id: set-version
+        run: echo "release-version=${MAVEN_POM_REVISION_VERSION}" >> $GITHUB_OUTPUT
