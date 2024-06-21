@@ -24,7 +24,7 @@ jobs:
   build_feature_branch:
     name: Build feature branch
     runs-on: ubuntu-latest
-    if: "github.ref != 'refs/heads/main'"
+    if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,16 +33,16 @@ jobs:
       - name: Setup Java and Maven
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: 21
-          cache: 'maven'
+          cache: maven
       - name: Build with Maven verify
         run: |
           ./mvnw --batch-mode verify javadoc:javadoc javadoc:aggregate
   build_main_branch:
     name: Build main branch
     runs-on: ubuntu-latest
-    if: "github.ref == 'refs/heads/main'"
+    if: github.ref == 'refs/heads/main'
     outputs:
       release-version: ${{ steps.set-version.outputs.release-version }}
     steps:
@@ -54,10 +54,10 @@ jobs:
       - name: Setup Java and Maven
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: 21
           cache: 'maven'
-          server-id: 'reload'
+          server-id: reload
           server-username: MAVEN_SERVER_USERNAME
           server-password: MAVEN_SERVER_PASSWORD
       - name: Read revision version from pom.xml
@@ -77,7 +77,7 @@ jobs:
           fi
 
       - name: Build with Maven deploy
-        if: ${{ env.DEPLOY_RELEASE  == 'true' }}
+        if: env.DEPLOY_RELEASE  == 'true'
         env:
           MAVEN_SERVER_USERNAME: ${{ secrets.MAVEN_SERVER_USERNAME }}
           MAVEN_SERVER_PASSWORD: ${{ secrets.MAVEN_SERVER_PASSWORD }}
@@ -87,7 +87,7 @@ jobs:
           rm -rf -- "${GITHUB_WORKSPACE}/target/${MAVEN_POM_REVISION_VERSION}" || :
           cp --recursive --verbose -- "${GITHUB_WORKSPACE}/target/latest" "${GITHUB_WORKSPACE}/target/${MAVEN_POM_REVISION_VERSION}"
       - name: Create new git tag
-        if: ${{ env.DEPLOY_RELEASE  == 'true' }}
+        if: env.DEPLOY_RELEASE  == 'true'
         uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{ env.MAVEN_POM_REVISION_VERSION }}
@@ -100,7 +100,7 @@ jobs:
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: '${{ secrets.CLOUDBUILD_COMMON_GCP_KEY }}'
+          credentials_json: ${{ secrets.CLOUDBUILD_COMMON_GCP_KEY }}
       - name: Upload latest JavaDoc copy to Google Cloud Storage
         uses: google-github-actions/upload-cloud-storage@v1
         with:
