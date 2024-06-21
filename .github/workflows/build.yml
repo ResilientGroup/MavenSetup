@@ -76,7 +76,11 @@ jobs:
             echo "DEPLOY_RELEASE=$DEPLOY_RELEASE" >> $GITHUB_ENV
           fi
 
-      - name: Build with Maven deploy
+      - name: Build merged feature without releasing it
+        if: env.DEPLOY_RELEASE  != 'true'
+        run: |
+          ./mvnw -Dchangelist= --batch-mode verify -DstagingDirectory="${GITHUB_WORKSPACE}/target/latest" site:site site:stage
+      - name: Build and deploy new release
         if: env.DEPLOY_RELEASE  == 'true'
         env:
           MAVEN_SERVER_USERNAME: ${{ secrets.MAVEN_SERVER_USERNAME }}
