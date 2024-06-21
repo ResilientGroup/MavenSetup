@@ -37,7 +37,8 @@ jobs:
           java-version: 21
           cache: 'maven'
       - name: Build with Maven verify
-        run: ./mvnw -B verify
+        run: |
+          ./mvnw --batch-mode verify javadoc:javadoc javadoc:aggregate
   build_main_branch:
     name: Build main branch
     runs-on: ubuntu-latest
@@ -62,7 +63,7 @@ jobs:
       - name: Read revision version from pom.xml
         shell: bash
         run: |
-          MAVEN_POM_REVISION_VERSION="$(./mvnw help:evaluate -Dexpression=revision -q -DforceStdout)"
+          MAVEN_POM_REVISION_VERSION="$(./mvnw --batch-mode help:evaluate -Dexpression=revision -q -DforceStdout)"
           echo "MAVEN_POM_REVISION_VERSION=$MAVEN_POM_REVISION_VERSION" >> $GITHUB_ENV
       - name: Check if revision is already tagged
         shell: bash
