@@ -18,7 +18,7 @@
 
 	<properties>
 		<!-- project version -->
-		<revision>1.5.1</revision>
+		<revision>1.6.0</revision>
 		<changelist>-SNAPSHOT</changelist>
 		<!-- project settings -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,7 +26,7 @@
 		<!-- plugin versions -->
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
-		<maven-dependency-plugin.version>3.7.0</maven-dependency-plugin.version>
+		<maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
 		<maven-release-plugin.version>3.1.0</maven-release-plugin.version>
 		<maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>

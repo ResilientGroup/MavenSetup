@@ -102,18 +102,18 @@ jobs:
         run: echo "release-version=${MAVEN_POM_REVISION_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.CLOUDBUILD_COMMON_GCP_KEY }}
       - name: Upload latest JavaDoc copy to Google Cloud Storage
-        uses: google-github-actions/upload-cloud-storage@v1
+        uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: target/latest
           destination: resilient-reload-javadoc/${{ inputs.javadoc-project-name || 'MavenSetup' }}
           process_gcloudignore: false
       - name: Upload versioned JavaDoc to Google Cloud Storage
         if: env.DEPLOY_RELEASE  == 'true'
-        uses: google-github-actions/upload-cloud-storage@v1
+        uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: target/${{ env.MAVEN_POM_REVISION_VERSION }}
           destination: resilient-reload-javadoc/${{ inputs.javadoc-project-name || 'MavenSetup' }}
