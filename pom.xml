@@ -38,7 +38,7 @@
 		<maven-pmd-plugin.version>3.23.0</maven-pmd-plugin.version>
 		<pmd-core.version>7.1.0</pmd-core.version>
 		<pmd-java.version>7.1.0</pmd-java.version>
-		<spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
+		<spotbugs-maven-plugin.version>4.8.6.1</spotbugs-maven-plugin.version>
 		<maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
 		<checkstyle.version>10.17.0</checkstyle.version>
 		<maven-project-info-reports-plugin.version>3.6.0</maven-project-info-reports-plugin.version>
