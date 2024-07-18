@@ -93,7 +93,7 @@ jobs:
           MAVEN_SERVER_USERNAME: ${{ secrets.MAVEN_SERVER_USERNAME }}
           MAVEN_SERVER_PASSWORD: ${{ secrets.MAVEN_SERVER_PASSWORD }}
         run: |
-          ./mvnw -Dchangelist= --batch-mode deploy
+          ./mvnw --batch-mode deploy -Dchangelist= -DskipTests=true -Dcheckstyle.skip=true -Dpmd.skip=true -Dspotbugs.skip=true
       - name: Create new git tag
         if: env.DEPLOY_RELEASE  == 'true'
         uses: rickstaa/action-create-tag@v1
