@@ -22,7 +22,7 @@
 		<changelist>-SNAPSHOT</changelist>
 		<!-- project settings -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>21</java.version>
+		<maven.compiler.target>21</maven.compiler.target>
 		<!-- plugin versions -->
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
@@ -85,7 +85,7 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
-						<release>${java.version}</release>
+						<release>${maven.compiler.target}</release>
 					</configuration>
 				</plugin>
 				<plugin>
