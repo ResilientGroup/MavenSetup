@@ -30,11 +30,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
+      - name: Determine Java version
+        uses: joshlong/java-version-export-github-action@v28
+        id: determine-java-version
       - name: Setup Java and Maven
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: ${{ steps.determine-java-version.outputs.java_major_version }}
           cache: maven
       - name: Build with Maven verify
         run: |
@@ -51,11 +54,14 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
+      - name: Determine Java version
+        uses: joshlong/java-version-export-github-action@v28
+        id: determine-java-version
       - name: Setup Java and Maven
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: ${{ steps.determine-java-version.outputs.java_major_version }}
           cache: 'maven'
           server-id: reload
           server-username: MAVEN_SERVER_USERNAME
