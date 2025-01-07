@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
 <ruleset name="Custom Rules"
-		 xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
 		 xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
 
 	<description>
@@ -26,24 +26,19 @@
 	<rule ref="category/java/bestpractices.xml/AvoidUsingHardCodedIP"/>
 	<rule ref="category/java/bestpractices.xml/CheckResultSet"/>
 	<rule ref="category/java/bestpractices.xml/ConstantsInInterface"/>
-	<rule ref="category/java/bestpractices.xml/DefaultLabelNotLastInSwitchStmt"/>
+	<rule ref="category/java/bestpractices.xml/DefaultLabelNotLastInSwitch"/>
 	<rule ref="category/java/bestpractices.xml/DoubleBraceInitialization"/>
 	<rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach"/>
 	<rule ref="category/java/bestpractices.xml/ForLoopVariableCount"/>
 	<!--<rule ref="category/java/bestpractices.xml/GuardLogStatement"/>-->
 	<rule ref="category/java/bestpractices.xml/JUnit4SuitesShouldUseSuiteAnnotation"/>
-	<rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseAfterAnnotation"/>
-	<rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseBeforeAnnotation"/>
-	<rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseTestAnnotation"/>
 	<rule ref="category/java/bestpractices.xml/JUnit5TestShouldBePackagePrivate"/>
-	<!--<rule ref="category/java/bestpractices.xml/JUnitAssertionsShouldIncludeMessage"/>-->
-	<!--<rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts"/>-->
-	<rule ref="category/java/bestpractices.xml/JUnitTestsShouldIncludeAssert"/>
 	<rule ref="category/java/bestpractices.xml/JUnitUseExpected"/>
 	<rule ref="category/java/bestpractices.xml/LiteralsFirstInComparisons"/>
 	<rule ref="category/java/bestpractices.xml/LooseCoupling"/>
 	<rule ref="category/java/bestpractices.xml/MethodReturnsInternalArray"/>
 	<rule ref="category/java/bestpractices.xml/MissingOverride"/>
+	<rule ref="category/java/bestpractices.xml/NonExhaustiveSwitch"/>
 	<rule ref="category/java/bestpractices.xml/OneDeclarationPerLine"/>
 	<rule ref="category/java/bestpractices.xml/PreserveStackTrace"/>
 	<rule ref="category/java/bestpractices.xml/PrimitiveWrapperInstantiation"/>
@@ -51,16 +46,21 @@
 	<rule ref="category/java/bestpractices.xml/ReplaceHashtableWithMap"/>
 	<!--<rule ref="category/java/bestpractices.xml/ReplaceVectorWithList"/>-->
 	<rule ref="category/java/bestpractices.xml/SimplifiableTestAssertion"/>
-	<rule ref="category/java/bestpractices.xml/SwitchStmtsShouldHaveDefault"/>
 	<rule ref="category/java/bestpractices.xml/SystemPrintln"/>
-	<rule ref="category/java/bestpractices.xml/UnnecessaryVarargsArrayCreation" />
+	<!--<rule ref="category/java/bestpractices.xml/UnitTestAssertionsShouldIncludeMessage"/>-->
+	<!--<rule ref="category/java/bestpractices.xml/UnitTestContainsTooManyAsserts"/>-->
+	<rule ref="category/java/bestpractices.xml/UnitTestShouldIncludeAssert"/>
+	<rule ref="category/java/bestpractices.xml/UnitTestShouldUseAfterAnnotation"/>
+	<rule ref="category/java/bestpractices.xml/UnitTestShouldUseBeforeAnnotation"/>
+	<rule ref="category/java/bestpractices.xml/UnitTestShouldUseTestAnnotation"/>
+	<rule ref="category/java/bestpractices.xml/UnnecessaryVarargsArrayCreation"/>
 	<rule ref="category/java/bestpractices.xml/UnusedAssignment"/>
 	<rule ref="category/java/bestpractices.xml/UnusedFormalParameter"/>
 	<rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
 	<rule ref="category/java/bestpractices.xml/UnusedPrivateField"/>
 	<rule ref="category/java/bestpractices.xml/UnusedPrivateMethod"/>
 	<rule ref="category/java/bestpractices.xml/UseCollectionIsEmpty"/>
-	<rule ref="category/java/bestpractices.xml/UseEnumCollections" />
+	<rule ref="category/java/bestpractices.xml/UseEnumCollections"/>
 	<rule ref="category/java/bestpractices.xml/UseStandardCharsets"/>
 	<rule ref="category/java/bestpractices.xml/UseTryWithResources"/>
 	<rule ref="category/java/bestpractices.xml/UseVarargs"/>
@@ -79,13 +79,13 @@
 	<rule ref="category/java/codestyle.xml/CallSuperInConstructor"/>
 	<rule ref="category/java/codestyle.xml/ClassNamingConventions">
 		<properties>
-			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[pmd-java:hasAnnotation('org.junit.jupiter.api.Nested')]" />
-			<property name="testClassPattern" value="^[A-Z][a-zA-Z0-9]*(IT|Tests)$"/>
+			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[pmd-java:hasAnnotation('org.junit.jupiter.api.Nested')]"/>
+			<property name="testClassPattern" value="^[A-Z][a-zA-Z0-9]*(IT|Tests|Fixture)$"/>
 		</properties>
 	</rule>
 	<rule ref="category/java/codestyle.xml/CommentDefaultAccessModifier">
 		<properties>
-			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests)$')]"/>
+			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests|Fixture)$')]"/>
 			<property name="ignoredAnnotations" value="com.google.common.annotations.VisibleForTesting,
 			android.support.annotation.VisibleForTesting,
 			org.junit.jupiter.api.Test,
@@ -119,10 +119,10 @@
 	<rule ref="category/java/codestyle.xml/FormalParameterNamingConventions"/>
 	<rule ref="category/java/codestyle.xml/GenericsNaming"/>
 	<rule ref="category/java/codestyle.xml/IdenticalCatchBranches"/>
-	<rule ref="category/java/codestyle.xml/LambdaCanBeMethodReference" />
+	<rule ref="category/java/codestyle.xml/LambdaCanBeMethodReference"/>
 	<rule ref="category/java/codestyle.xml/LinguisticNaming">
 		<properties>
-			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests)$')]"/>
+			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests|Fixture)$')]"/>
 		</properties>
 	</rule>
 	<rule ref="category/java/codestyle.xml/LocalHomeNamingConvention"/>
@@ -134,7 +134,7 @@
 	<rule ref="category/java/codestyle.xml/MethodArgumentCouldBeFinal"/>
 	<rule ref="category/java/codestyle.xml/MethodNamingConventions">
 		<properties>
-			<property name="junit5TestPattern" value="[a-zA-Z][a-zA-Z0-9_]*" />
+			<property name="junit5TestPattern" value="[a-zA-Z][a-zA-Z0-9_]*"/>
 		</properties>
 	</rule>
 	<rule ref="category/java/codestyle.xml/NoPackage"/>
@@ -145,7 +145,7 @@
 	<rule ref="category/java/codestyle.xml/RemoteSessionInterfaceNamingConvention"/>
 	<rule ref="category/java/codestyle.xml/ShortClassName">
 		<properties>
-			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests)$')]"/>
+			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests|Fixture)$')]"/>
 		</properties>
 	</rule>
 	<rule ref="category/java/codestyle.xml/ShortMethodName"/>
@@ -156,7 +156,7 @@
 		</properties>
 	</rule>
 	<rule ref="category/java/codestyle.xml/UnnecessaryAnnotationValueElement"/>
-	<rule ref="category/java/codestyle.xml/UnnecessaryBoxing" />
+	<rule ref="category/java/codestyle.xml/UnnecessaryBoxing"/>
 	<rule ref="category/java/codestyle.xml/UnnecessaryCast"/>
 	<!--<rule ref="category/java/codestyle.xml/UnnecessaryConstructor"/>-->
 	<rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName"/>
@@ -166,7 +166,7 @@
 	<rule ref="category/java/codestyle.xml/UnnecessaryReturn"/>
 	<rule ref="category/java/codestyle.xml/UnnecessarySemicolon"/>
 	<rule ref="category/java/codestyle.xml/UseDiamondOperator"/>
-	<rule ref="category/java/codestyle.xml/UseExplicitTypes" />
+	<rule ref="category/java/codestyle.xml/UseExplicitTypes"/>
 	<rule ref="category/java/codestyle.xml/UselessParentheses"/>
 	<rule ref="category/java/codestyle.xml/UselessQualifiedThis"/>
 	<rule ref="category/java/codestyle.xml/UseShortArrayInitializer"/>
@@ -215,7 +215,7 @@
 	<rule ref="category/java/design.xml/TooManyFields"/>
 	<rule ref="category/java/design.xml/TooManyMethods">
 		<properties>
-			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests)$')]"/>
+			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests|Fixture)$')]"/>
 		</properties>
 	</rule>
 	<rule ref="category/java/design.xml/UselessOverridingMethod"/>
@@ -249,7 +249,7 @@
 	<rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
 		<properties>
 			<property name="skipAnnotations" value="true" />
-			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests)$')]"/>
+			<property name="violationSuppressXPath" value="//ancestor::ClassDeclaration[matches(@SimpleName, '^.*(IT|Tests|Fixture)$')]"/>
 		</properties>
 	</rule>
 	<rule ref="category/java/errorprone.xml/AvoidEnumAsIdentifier"/>
@@ -271,7 +271,7 @@
 	<rule ref="category/java/errorprone.xml/CloseResource"/>
 	<rule ref="category/java/errorprone.xml/CompareObjectsWithEquals"/>
 	<rule ref="category/java/errorprone.xml/ComparisonWithNaN"/>
-	<rule ref="category/java/errorprone.xml/ConfusingArgumentToVarargsMethod" />
+	<rule ref="category/java/errorprone.xml/ConfusingArgumentToVarargsMethod"/>
 	<rule ref="category/java/errorprone.xml/ConstructorCallsOverridableMethod"/>
 	<rule ref="category/java/errorprone.xml/DetachedTestCase"/>
 	<rule ref="category/java/errorprone.xml/DoNotCallGarbageCollectionExplicitly"/>
@@ -300,8 +300,8 @@
 	<rule ref="category/java/errorprone.xml/MissingSerialVersionUID"/>
 	<rule ref="category/java/errorprone.xml/MissingStaticMethodInNonInstantiatableClass"/>
 	<rule ref="category/java/errorprone.xml/MoreThanOneLogger"/>
-	<rule ref="category/java/errorprone.xml/NonCaseLabelInSwitchStatement"/>
-	<rule ref="category/java/errorprone.xml/NonSerializableClass" />
+	<rule ref="category/java/errorprone.xml/NonCaseLabelInSwitch"/>
+	<rule ref="category/java/errorprone.xml/NonSerializableClass"/>
 	<rule ref="category/java/errorprone.xml/NonStaticInitializer"/>
 	<!--<rule ref="category/java/errorprone.xml/NullAssignment"/>-->
 	<rule ref="category/java/errorprone.xml/OverrideBothEqualsAndHashcode"/>
@@ -330,7 +330,7 @@
 	<rule ref="category/java/errorprone.xml/UseProperClassLoader"/>
 
 	<rule ref="category/java/multithreading.xml/AvoidSynchronizedAtMethodLevel"/>
-	<rule ref="category/java/multithreading.xml/AvoidSynchronizedStatement" />
+	<rule ref="category/java/multithreading.xml/AvoidSynchronizedStatement"/>
 	<rule ref="category/java/multithreading.xml/AvoidThreadGroup"/>
 	<rule ref="category/java/multithreading.xml/AvoidUsingVolatile"/>
 	<rule ref="category/java/multithreading.xml/DoNotUseThreads"/>
@@ -357,7 +357,7 @@
 	<rule ref="category/java/performance.xml/RedundantFieldInitializer"/>
 	<rule ref="category/java/performance.xml/StringInstantiation"/>
 	<rule ref="category/java/performance.xml/StringToString"/>
-	<rule ref="category/java/performance.xml/TooFewBranchesForASwitchStatement"/>
+	<rule ref="category/java/performance.xml/TooFewBranchesForSwitch"/>
 	<rule ref="category/java/performance.xml/UseArrayListInsteadOfVector"/>
 	<rule ref="category/java/performance.xml/UseArraysAsList"/>
 	<rule ref="category/java/performance.xml/UseIndexOfChar"/>
