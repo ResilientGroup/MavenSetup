@@ -14,4 +14,8 @@
 		<!-- https://github.com/spotbugs/spotbugs/issues/1338 -->
 		<Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>
 	</Match>
+	<Match>
+		<!-- https://github.com/spotbugs/spotbugs/issues/2965 -->
+		<Bug pattern="US_USELESS_SUPPRESSION_ON_METHOD"/>
+	</Match>
 </FindBugsFilter>
