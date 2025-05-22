@@ -18,7 +18,7 @@
 
 	<properties>
 		<!-- project version -->
-		<revision>2.6.1</revision>
+		<revision>2.7.0</revision>
 		<changelist>-SNAPSHOT</changelist>
 		<!-- project test groups -->
 		<includedSurefireGroups>none() | any()</includedSurefireGroups>
@@ -613,6 +613,41 @@
 		</plugins>
 	</reporting>
 	<profiles>
+		<profile>
+			<id>Skip-Verification</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.ec4j.maven</groupId>
+						<artifactId>editorconfig-maven-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>com.github.spotbugs</groupId>
+						<artifactId>spotbugs-maven-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<!--
 			includedSurefireGroups runs unit tests (selected via tags) exclusively; tags excluded by default need to be explicitly un-excluded.
 			excludedSurefireGroups ignores unit tests.
