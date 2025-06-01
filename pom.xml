@@ -32,7 +32,7 @@
 		<spotbugs-annotations.version>4.9.3</spotbugs-annotations.version>
 		<hamcrest.version>3.0</hamcrest.version>
 		<junit.version>5.12.2</junit.version>
-		<mockito.version>5.17.0</mockito.version>
+		<mockito.version>5.18.0</mockito.version>
 		<!-- pluginManagement -->
 		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
 		<maven-surefire-report-plugin.version>3.5.3</maven-surefire-report-plugin.version>
